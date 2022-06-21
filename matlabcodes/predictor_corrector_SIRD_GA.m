@@ -1,5 +1,5 @@
 function predictor_corrector_SIRD_GA
-close all 
+%close all 
 clc  
 format long 
 warning('off','all')
@@ -9,7 +9,7 @@ warning('off','all')
 % load LIBcumcases.txt;
 % load SFcumcases.txt;
 % load Mcumcases.txt;
-load Georgiacumcases.txt;
+%load Georgiacumcases.txt;
 
 global Cdata Cdata_inc tdata n gamma nu a b N m NP
 gamma = 1/5;
