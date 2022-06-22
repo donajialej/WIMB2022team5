@@ -1,4 +1,4 @@
-function dy = RHS(t,y,par,thetas)
+function dy = RHS(t,y,thetas,par)
 beta  =  betacomp(t,10,thetas,0,60); 
 N = par(1);
 p = par(2);
