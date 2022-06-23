@@ -29,6 +29,7 @@ S0 = N-V0-Is0-Iv0-D0;
 
 
 thetas = [0.32 -0.38 0.4 -0.37 0.42 -0.4 0.34 -0.25 0.13 -0.0098];
+%thetas = [0.43 -0.73 0.92 -1 1.1 -0.97 0.92 -0.59 0.31 -0.08];
 [T, y] = ode45(@(t,y) RHS(t,y,thetas,par),[0 end_day],[S0 V0 Is0 Iv0 D0],[thetas,par]);
 
 
@@ -48,6 +49,18 @@ title('Total infections')
 beta = betacomp(T,10,thetas,0,60); 
 Inew = beta .* y(:,1).* ((y(:,3) +y(:,4)) ./ (N - y(:,5))) + beta.* (1-par(3)) .* y(:,2).* ((y(:,3) +y(:,4)) ./ (N - y(:,5)));
 Inew_real = Inew + randn(size(Inew))*10^5;
+D_daily = y(2:end,5) - y(1:end-1,5);
+D_daily_noise = poissrnd(D_daily);% +randn(size(D_daily))*10^3;
+figure
+plot(T(1:end-1),D_daily)
+hold on
+plot(T(1:end-1),D_daily_noise,'*')
+D_real = y(1,5) + [1 ;cumsum(D_daily_noise)];
+figure
+plot(T,y(:,5))
+hold on
+plot(T,D_real,'*')
+
 for i =1:length(Inew)
     if Inew_real(i)<0
         Inew_real(i) = Inew(i) + unifrnd(-Inew(i),Inew(i));
@@ -58,5 +71,5 @@ figure
 plot(T,Inew,T,Inew_real,'*', 'LineWidth',2)
 title('Daily infections')
 
-save('data_Ne.mat','Inew_real')
-save('T_Ne.mat','T')
+save('data_Ne.mat','Inew_real','T', 'D_real')
+%save('T_Ne.mat','T')

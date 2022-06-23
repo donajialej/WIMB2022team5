@@ -3,7 +3,7 @@
 clear all; close all;
 
 load('data_Ne.mat');
-load('T_Ne.mat');
+%load('T_Ne.mat');
 thetas_real = [0.32 -0.38 0.4 -0.37 0.42 -0.4 0.34 -0.25 0.13 -0.0098];
 time = T;
 data = Inew_real;
