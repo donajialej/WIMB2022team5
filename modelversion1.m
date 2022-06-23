@@ -27,7 +27,7 @@ Iv0 = I0*vac_perc;
 D0 = 6*10^5;
 S0 = N-V0-Is0-Iv0-D0;
 
-% solve differential equations for vector y=[S;I] from day 0 to day end_day
+% solve differential equations for vector y from day 0 to day end_day
 % and initial conditions as specified
 
 
@@ -36,17 +36,8 @@ thetas = [0.32 -0.38 0.4 -0.37 0.42 -0.4 0.34 -0.25 0.13 -0.0098];
 [T, y] = ode45(@(t,y) RHS(t,y,thetas,par),[0 end_day],[S0 V0 Is0 Iv0 D0],[thetas,par]);
 
 
-plot(T,y(:,3:5), 'LineWidth',2)
-lgd = legend('I_s','I_v','D');
-
-figure
-plot(T(2:end),y(2:end,5) - y(1:end-1,5), 'LineWidth',2)
-title('Daily deaths')
-
 Itotal = y(:,3) + y(:,4);
-figure
-plot(T,Itotal, 'LineWidth',2)
-title('Total infections')
+
 
 
 beta = betacomp(T,10,thetas,0,60); 
