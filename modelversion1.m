@@ -1,6 +1,9 @@
 % Covid model forward simulation, NETHERLANDS thetas
 
 clear all; close all;
+% Fix the seed to have reproducible data:
+seed = 10;
+rng(seed);
 
 % initial conditions
 N = 3*10^8;
