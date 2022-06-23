@@ -49,27 +49,35 @@ title('Total infections')
 beta = betacomp(T,10,thetas,0,60); 
 Inew = beta .* y(:,1).* ((y(:,3) +y(:,4)) ./ (N - y(:,5))) + beta.* (1-par(3)) .* y(:,2).* ((y(:,3) +y(:,4)) ./ (N - y(:,5)));
 Inew_real = Inew + randn(size(Inew))*10^5;
-D_daily = y(2:end,5) - y(1:end-1,5);
-D_daily_noise = poissrnd(D_daily);% +randn(size(D_daily))*10^3;
+for i =1:length(Inew)
+    if Inew_real(i)<0
+        Inew_real(i) = Inew(i) + unifrnd(-Inew(i),Inew(i));
+    end
+end
 figure
-plot(T(1:end-1),D_daily)
+plot(T,Inew,T,Inew_real,'*', 'LineWidth',2)
+title('Daily infections')
+
+D_daily = y(2:end,5) - y(1:end-1,5);
+D_daily_noise = D_daily +randn(size(D_daily))*10^2;
+for i =1:length(D_daily)
+    if D_daily_noise(i)<0
+        D_daily_noise(i) = D_daily(i) + unifrnd(-D_daily(i),D_daily(i));
+    end
+end
+figure
+plot(T(1:end-1),D_daily, 'LineWidth',2)
 hold on
-plot(T(1:end-1),D_daily_noise,'*')
+plot(T(1:end-1),D_daily_noise,'*', 'LineWidth',2)
 D_real = y(1,5) + [1 ;cumsum(D_daily_noise)];
 figure
 plot(T,y(:,5))
 hold on
 plot(T,D_real,'*')
 
-for i =1:length(Inew)
-    if Inew_real(i)<0
-        Inew_real(i) = Inew(i) + unifrnd(-Inew(i),Inew(i));
-    end
-end
 
-figure
-plot(T,Inew,T,Inew_real,'*', 'LineWidth',2)
-title('Daily infections')
+size(D_real)
+size(Inew_real)
 
 save('data_Ne.mat','Inew_real','T', 'D_real')
 %save('T_Ne.mat','T')
