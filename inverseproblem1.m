@@ -50,18 +50,18 @@ hold on
 plot(time,forwardmodel1(thetas_real,time),'-.', 'LineWidth',2)
 hold off
   
-n_boots =1;
+n_boots =100;
+tic;
 thetas_i = zeros(n_boots,10);
 for i =1:n_boots
-    i
     data_i = poissrnd(data);
     [thetas_fit,resnorm] = lsqcurvefit(@forwardmodel1,thetas_IC,time,data_i,[],[],...
                              optimset('TolX',10^(-15),'TolFun',10^(-15)));
    thetas_i(i,:)= thetas_fit';
 end
+toc;
 
-figure
-histogram(thetas_i(:,1))
+
 
 function Inew = forwardmodel1(thetas,time)
 % params and IC for ODE solver
