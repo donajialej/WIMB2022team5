@@ -1,5 +1,5 @@
 # WIMB2022team5
-The repository for team 5 from the Collaboraitve Workshop on Women Health 2022, at Minnesota, USA. The team leaders: Ruiyan Luo (Department of Population Health Sciences, School of Public Health) and Alexandra Smirnov (Department of Mathematics \& Statistics) from Georgia State University, Atlanta, USA. The rest of the team: , ... , ....,  Alejandra D. Herrera-Reyes (School of Mathematical Sciences, University of Nottingham, Nottingham, UK), and Diana White (Department of Mathematics & Statistics, Clarkson University, Potsdam, NY, USA).
+The repository for team 5 from the Collaboraitve Workshop on Women Health 2022, at Minnesota, USA. The team leaders: Ruiyan Luo (Department of Population Health Sciences, School of Public Health) and Alexandra Smirnov (Department of Mathematics \& Statistics) from Georgia State University, Atlanta, USA. The rest of the team: , Alejandra D. Herrera-Reyes (School of Mathematical Sciences, University of Nottingham, Nottingham, UK), Yena Kim, Susan R., and Diana White (Department of Mathematics & Statistics, Clarkson University, Potsdam, NY, USA).
 
 Our work is titled: __Parameter Estimation for COVID-19 SVIRD   Model Using Predictor-Corrector Algorithm__. 
 
@@ -18,3 +18,10 @@ After running the previous codes, the figures can be generated using  `Figures_S
 To generate figure 8 and 9 run:
 - `Param_Est_SVIRD_PCM_GA_mult_rep_rates` for GA
 - `Param_Est_SVIRD_PCM_CAL_mult_rep_rates` for CA.
+
+
+Lastly, the synthetic data was generated with:
+- `svird_forward_D2_new.` for Synthetic scenario 1.
+- `svird_forward_DI_new.m` for Synthetic scenario 2.
+
+The synthetic data set did not had a fixed seed when generated, so you will not recreate exactly the same data set, but they will follow the same distribution.
